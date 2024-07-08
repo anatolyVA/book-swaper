@@ -4,25 +4,40 @@ import React from "react";
 import { Badge } from "@/shared/ui/badge";
 import { BookCardCarousel } from "./book.card.carousel";
 import { Button } from "@/shared/ui/button";
+import { Book } from "@/entities/book";
 
-export const BookCard = ({}) => {
-  const nameDemo: string = "Дурак(сигма)";
-  const descriptionDemo: string =
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam eum ipsa modi non quam. Amet eveniet id laudantium perferendis?";
+interface BookCardProps {
+  data: Book;
+}
+export const BookCard = ({ data }: BookCardProps) => {
+  const tags = [
+    data.condition,
+    data.genre,
+    data.coverType,
+    data.status,
+    data.language,
+  ];
 
   const descriptionSlice: string =
-    descriptionDemo.length >= 50
-      ? descriptionDemo.slice(0, 50) + "..."
-      : descriptionDemo;
+    data.description.length >= 50
+      ? data.description.slice(0, 50) + "..."
+      : data.description;
   return (
     <article className="rounded-2xl overflow-hidden shadow-lg">
       <BookCardCarousel />
       <div className="p-6 pt-2">
         <div className="mb-2">
-          <Badge>Classic</Badge>
+          {tags.map(
+            (tag) =>
+              tag && (
+                <Badge key={tag} className="mr-2">
+                  {tag}
+                </Badge>
+              ),
+          )}
         </div>
 
-        <h2 className="font-bold text-lg">{nameDemo}</h2>
+        <h2 className="font-bold text-lg">{data.title}</h2>
         <p className="mb-4">{descriptionSlice}</p>
         <Button
           className="w-full"
