@@ -3,6 +3,7 @@ import { LoginForm } from "@/features/login";
 import { Button } from "@/shared/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { RegisterForm } from "@/features/register";
 
 function AuthPage() {
   return (
@@ -18,7 +19,8 @@ function AuthPage() {
           />
         </Link>
         <h2 className="text-center text-3xl font-bold text-primary">Sign In</h2>
-        <LoginForm />
+        <RegisterForm />
+        {/*<LoginForm />*/}
         <div className="flex gap-4">
           <Button asChild variant="link">
             <Link href="/auth#sign-up">I don`t have an account yet</Link>
