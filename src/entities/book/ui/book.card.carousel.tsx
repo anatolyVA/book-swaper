@@ -7,10 +7,10 @@ export const BookCardCarousel = () => {
         <CarouselItem className="flex h-[220px] bg-orange-200 items-center justify-center">
           Img
         </CarouselItem>
-        <CarouselItem className="flex h-[220px] bg-orange-200 items-center justify-center">
+        <CarouselItem className="flex h-[220px] bg-orange-300 items-center justify-center">
           Img
         </CarouselItem>
-        <CarouselItem className="flex h-[220px] bg-orange-200 items-center justify-center">
+        <CarouselItem className="flex h-[220px] bg-orange-400 items-center justify-center">
           Img
         </CarouselItem>
       </CarouselContent>

@@ -1,5 +1,6 @@
 import { api, apiWithAuth } from "@/shared/api/axios";
-import { User } from "../types";
+import { User, createUserSchema } from "../types";
+import { z } from "zod";
 
 class UserApi {
   private URL = "/users";
@@ -24,6 +25,11 @@ class UserApi {
 
   async deleteUser(id: string) {
     const { data } = await apiWithAuth.delete<User>(`${this.URL}/${id}`);
+    return data;
+  }
+
+  async createUser(values: z.infer<typeof createUserSchema>) {
+    const { data } = await api.post(this.URL, values);
     return data;
   }
 }

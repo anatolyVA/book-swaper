@@ -23,7 +23,7 @@ enum UserRole {
   ADMIN = "ADMIN",
 }
 
-const UserRegisterFormSchema = z.object({
+const createUserSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
   profile: z.object({
@@ -34,15 +34,9 @@ const UserRegisterFormSchema = z.object({
   }),
 });
 
-const UserLoginFormSchema = z.object({
+const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
 
-export {
-  type User,
-  UserRegisterFormSchema,
-  UserLoginFormSchema,
-  type UserProfile,
-  UserRole,
-};
+export { type User, createUserSchema, loginSchema, type UserProfile, UserRole };

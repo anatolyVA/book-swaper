@@ -9,6 +9,7 @@ import { Book } from "@/entities/book";
 interface BookCardProps {
   data: Book;
 }
+
 export const BookCard = ({ data }: BookCardProps) => {
   const tags = [
     data.condition,

@@ -17,10 +17,10 @@ export function Header() {
       {/*<Search />*/}
       <div className="flex gap-2">
         <Button asChild>
-          <Link href="#">Sign In</Link>
+          <Link href="/auth">Sign In</Link>
         </Button>
         <Button asChild>
-          <Link href="#">Sign Up</Link>
+          <Link href="/auth">Sign Up</Link>
         </Button>
       </div>
     </header>
