@@ -5,6 +5,7 @@ import { Badge } from "@/shared/ui/badge";
 import { BookCardCarousel } from "./book.card.carousel";
 import { Button } from "@/shared/ui/button";
 import { Book } from "@/entities/book";
+import { Card, CardContent, CardFooter } from "@/shared/ui/card";
 
 interface BookCardProps {
   data: Book;
@@ -24,31 +25,15 @@ export const BookCard = ({ data }: BookCardProps) => {
       ? data.description.slice(0, 50) + "..."
       : data.description;
   return (
-    <article className="rounded-2xl overflow-hidden shadow-lg">
+    <Card className="overflow-hidden">
       <BookCardCarousel />
-      <div className="p-6 pt-2">
-        <div className="mb-2">
-          {tags.map(
-            (tag) =>
-              tag && (
-                <Badge key={tag} className="mr-2">
-                  {tag}
-                </Badge>
-              ),
-          )}
+      <CardFooter className="flex flex-col gap-4 items-start pt-4">
+        <div>
+          <h4 className="font-bold text-lg">{data.title}</h4>
+          <p>{descriptionSlice}</p>
         </div>
-
-        <h2 className="font-bold text-lg">{data.title}</h2>
-        <p className="mb-4">{descriptionSlice}</p>
-        <Button
-          className="w-full"
-          onClick={() =>
-            alert("otkrivaetsia modalka(skoree vsego eto budet page) /swap")
-          }
-        >
-          Swap
-        </Button>
-      </div>
-    </article>
+        <Button className="w-full">Swap</Button>
+      </CardFooter>
+    </Card>
   );
 };

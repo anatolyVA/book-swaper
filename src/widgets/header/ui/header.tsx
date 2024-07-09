@@ -1,28 +1,41 @@
 import Image from "next/image";
 import { Button } from "@/shared/ui/button";
 import Link from "next/link";
+import { userApi } from "@/entities/user";
+import HeaderRightSide from "@/widgets/header/ui/header.right-side";
+import { ROUTES } from "@/shared/config/routes";
 
-export function Header() {
+export async function Header() {
+  const data = await userApi.getCurrentUser().catch((err) => {
+    console.log(err);
+    return null;
+  });
+
   return (
-    <header className="sticky top-0 z-50 flex justify-between items-center py-3 px-12 h-[70px] bg-black">
-      <div className="flex text-white leading-[2.2rem]">
-        <Image
-          src="/logo.svg"
-          alt="logo"
-          width={0}
-          height={50}
-          className="w-full"
-        />
+    <header className="sticky top-0 z-50 flex justify-between items-center py-3 px-12 h-[70px] border-b bg-background">
+      <div className="flex items-center">
+        <Link href={ROUTES.HOME} className="mr-8">
+          <Image
+            src="/logo.svg"
+            alt="logo"
+            width={180}
+            height={24}
+            className="w-full"
+          />
+        </Link>
+        <div className="flex gap-2">
+          <Button size="default" asChild variant="link">
+            <Link href={ROUTES.BOOKS}>Books</Link>
+          </Button>
+          <Button size="default" asChild variant="link">
+            <Link href={`${ROUTES.HOME}/#about-us`}>About us</Link>
+          </Button>
+          <Button size="default" asChild variant="link">
+            <Link href={`${ROUTES.HOME}/#support-form`}>Support</Link>
+          </Button>
+        </div>
       </div>
-      {/*<Search />*/}
-      <div className="flex gap-2">
-        <Button asChild>
-          <Link href="/auth">Sign In</Link>
-        </Button>
-        <Button asChild>
-          <Link href="/auth">Sign Up</Link>
-        </Button>
-      </div>
+      <HeaderRightSide />
     </header>
   );
 }

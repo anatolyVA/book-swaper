@@ -9,7 +9,6 @@ export const saveTokenStorage = (token: string) => {
   Cookies.set("access_token", token, {
     domain: "localhost",
     sameSite: "strict",
-    expires: 1,
   });
 };
 

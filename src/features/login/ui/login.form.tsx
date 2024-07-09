@@ -15,8 +15,12 @@ import {
 } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { login } from "@/features/login/api";
+import { saveTokenStorage } from "@/shared/lib/auth-tokens";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,12 +31,17 @@ export function LoginForm() {
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     const { email, password } = data;
-    const { access_token } = await login(email, password);
-    console.log(access_token);
+    await login(email, password).then(({ access_token }) => {
+      saveTokenStorage(access_token);
+      router.push("/books");
+    });
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 w-[400px] max-w-[400px]"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -63,7 +72,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Enter to your account</Button>
       </form>
     </Form>
   );

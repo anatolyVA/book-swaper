@@ -5,6 +5,11 @@ import { z } from "zod";
 class UserApi {
   private URL = "/users";
 
+  async getCurrentUser() {
+    const { data } = await apiWithAuth.get<User>(`${this.URL}/me`);
+    return data;
+  }
+
   async getUser(id: string) {
     const { data } = await api.get<User>(`${this.URL}/${id}`);
     return data;
