@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
@@ -5,20 +7,25 @@ import {
   type CarouselApi,
 } from "@/shared/ui/carousel";
 import React from "react";
+import { cn } from "@/shared/lib/utils";
 
-export const BookCardCarousel = () => {
+interface BookCardCarouselProps {
+  className?: string;
+}
+
+export const BookCardCarousel = ({ className }: BookCardCarouselProps) => {
   const [api, setApi] = React.useState<CarouselApi>();
 
   return (
-    <Carousel className="" setApi={setApi}>
-      <CarouselContent className="">
-        <CarouselItem className="flex h-[320px] bg-gray-900 items-center justify-center">
+    <Carousel setApi={setApi}>
+      <CarouselContent className={cn("min-h-[320px] flex-1", className)}>
+        <CarouselItem className="flex bg-gray-900 items-center justify-center">
           Img
         </CarouselItem>
-        <CarouselItem className="flex h-[320px] bg-gray-800 items-center justify-center">
+        <CarouselItem className="flex bg-gray-800 items-center justify-center">
           Img
         </CarouselItem>
-        <CarouselItem className="flex h-[320px] bg-gray-700 items-center justify-center">
+        <CarouselItem className="flex bg-gray-700 items-center justify-center">
           Img
         </CarouselItem>
       </CarouselContent>
