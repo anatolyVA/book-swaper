@@ -134,7 +134,7 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit">Create account</Button>
       </form>
     </Form>
   );

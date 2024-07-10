@@ -9,27 +9,28 @@ import { ROUTES } from "@/shared/config/routes";
 
 function HeaderRightSide() {
   const [data, setData] = React.useState<User | null>(null);
+  const [isAuthorized, setIsAuthorized] = React.useState(false);
 
   useEffect(() => {
     userApi
       .getCurrentUser()
-      .then((data) => setData(data))
+      .then((data) => setIsAuthorized(true))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className="flex gap-2">
-      {data ? (
+      {isAuthorized ? (
         <>
           <Button variant="default" asChild>
             <Link href={ROUTES.PROFILE}>Profile</Link>
           </Button>
-          <LogoutButton />
+          <LogoutButton onLogout={() => setIsAuthorized(false)} />
         </>
       ) : (
         <>
           <Button variant="default" asChild>
-            <Link href={ROUTES.LOGIN}>Sign In</Link>
+            <Link href={ROUTES.SIGN_IN}>Sign In</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link href={ROUTES.SIGN_UP}>Sign Up</Link>
