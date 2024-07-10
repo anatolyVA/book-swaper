@@ -39,6 +39,22 @@
   * {
     @apply border-border;
   }
+  @keyframes moveLeft {
+    0% {
+      transform: translateX(0);
+      width: 100%
+    }
+    50% {
+      width: 75vw
+    }
+    100% {
+      transform: translateX(50vw);
+      width: 100%
+    }
+  }
+  .registerKeyframe{
+    animation: moveLeft 1s ease-in-out forwards
+  }
 
   body {
     @apply bg-background text-foreground;
