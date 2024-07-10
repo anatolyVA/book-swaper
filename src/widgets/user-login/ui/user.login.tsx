@@ -5,11 +5,11 @@ import Image from "next/image";
 import { LoginForm } from "@/features/login";
 import { Button } from "@/shared/ui/button";
 import { RegisterForm } from "@/features/register";
+import { NewPassword } from "@/features/new-password";
 
 export function UserLogin() {
-  return <ForgotPassword />;
-}
-/* <section
+  return (
+    <section
       className={`relative flex flex-col gap-4 p-12 justify-center items-center ${true ? "xl:registerKeyframe" : ""} bg-black`}
     >
       <Link href="/">
@@ -25,7 +25,7 @@ export function UserLogin() {
         {true ? "Register" : "Sign In"}
       </h2>
 
-      {true ? <RegisterForm /> : <LoginForm />}
+      <NewPassword />
 
       <div className="flex gap-4">
         <Button asChild variant="link">
@@ -35,4 +35,6 @@ export function UserLogin() {
           <Link href="#">I forgot my password</Link>
         </Button>
       </div>
-    </section>*/
+    </section>
+  );
+}
