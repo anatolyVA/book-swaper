@@ -56,4 +56,12 @@ apiWithAuth.interceptors.response.use(
   },
 );
 
-export { api, apiWithAuth };
+const countryApi = axios.create({
+  baseURL: "https://api.countrystatecity.in/v1",
+  headers: {
+    "Content-Type": "application/json",
+    "X-CSCAPI-KEY": "API_KEY",
+  },
+});
+
+export { api, apiWithAuth, countryApi };

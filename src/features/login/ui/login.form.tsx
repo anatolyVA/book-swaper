@@ -40,7 +40,7 @@ export function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-[400px] max-w-[400px]"
+        className="flex flex-col gap-4 w-[500px] max-w-[500px]"
       >
         <FormField
           control={form.control}

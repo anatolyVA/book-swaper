@@ -15,6 +15,7 @@ interface UserProfile {
   firstName: string;
   lastName: string;
   country: string;
+  state: string;
   city: string;
 }
 
@@ -29,8 +30,11 @@ const createUserSchema = z.object({
   profile: z.object({
     firstName: z.string().min(2).max(50),
     lastName: z.string().min(2).max(50),
-    country: z.string().min(1),
-    city: z.string().min(1),
+    country: z
+      .string()
+      .refine((value) => !!value, { message: "Country is required" }),
+    city: z.string(),
+    state: z.string(),
   }),
 });
 

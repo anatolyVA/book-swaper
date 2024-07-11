@@ -1,4 +1,3 @@
-import axios from "axios";
 import { api } from "@/shared/api/axios";
 import { createUserSchema } from "@/entities/user";
 import { z } from "zod";
