@@ -42,13 +42,15 @@ export const BookCard = ({ data, variant = "grid" }: BookCardProps) => {
     <article className="grid grid-cols-[3fr_9fr] gap-2">
       <div className="flex flex-col gap-2">
         <BookCardCarousel className="min-h-[120px] h-full" />
-        <Button size="sm">Details</Button>
       </div>
-      <main className="flex flex-col gap-3">
+      <main className={`flex flex-col gap-3`}>
         <header className="flex flex-col">
-          <h4 className="font-bold">{data.title}</h4>
+          <h4 className="font-bold mb-3">{data.title}</h4>
           <p className="text-xs">{descriptionSlice}</p>
         </header>
+        <Button size="sm" className="w-[5rem]">
+          Details
+        </Button>
       </main>
     </article>
   );

@@ -43,4 +43,15 @@ const loginSchema = z.object({
   password: z.string().min(6),
 });
 
-export { type User, createUserSchema, loginSchema, type UserProfile, UserRole };
+const newPasswordSchema = z.object({
+  email: z.string().email(),
+});
+
+export {
+  type User,
+  createUserSchema,
+  loginSchema,
+  newPasswordSchema,
+  type UserProfile,
+  UserRole,
+};
