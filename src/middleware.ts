@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
   const refreshToken = cookies.get("refresh_token")?.value;
 
-  const isProfilePage = url.includes("/profile");
+  const isProfilePage = url.includes("/i");
   const isAuthPage =
     url.includes(ROUTES.SIGN_IN) || url.includes(ROUTES.SIGN_UP);
 
@@ -26,5 +26,5 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-  matcher: ["/profile/:path*", "/sign-up/:path*", "/sign-in/:path*"],
+  matcher: ["/i/:path*", "/sign-up/:path*", "/sign-in/:path*"],
 };

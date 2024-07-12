@@ -29,10 +29,10 @@ export function AlbumCard({ className }: BookCardAlbumProps) {
   });
   return (
     <div className={cn("min-h-[25rem]", className)}>
-      <div className="min-h-[320px] w-full 795:min-w-[25rem] flex justify-center items-center bg-white text-black mb-4">
+      <div className="min-h-[320px] w-full lg:min-w-[25rem] flex justify-center items-center bg-white text-black mb-2">
         {image}
       </div>
-      <div className="flex gap-1 h-[5rem]">{buttons}</div>
+      <div className="grid gap-1 grid-cols-5 h-[5rem]">{buttons}</div>
     </div>
   );
 }
