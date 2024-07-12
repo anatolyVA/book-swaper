@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export const getInitials = (
   firstName: string,
   lastName: string,
-  patronym: string | undefined,
+  patronym: string = "",
 ) =>
   patronym
     ? `${lastName} ${firstName[0]}.${patronym[0]}.`

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { Button } from "@/shared/ui/button";
-import { User, userApi } from "@/entities/user";
+import { User, userApi, UserMenuButton } from "@/entities/user";
 import Link from "next/link";
 import { LogoutButton } from "@/features/logout";
 import { ROUTES } from "@/shared/config/routes";
@@ -14,17 +14,18 @@ function HeaderRightSide() {
   useEffect(() => {
     userApi
       .getCurrentUser()
-      .then((data) => setIsAuthorized(true))
+      .then((data) => {
+        setIsAuthorized(true);
+        setData(data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <div className="flex gap-2">
-      {isAuthorized ? (
+    <div className="flex gap-4 items-center">
+      {isAuthorized && data ? (
         <>
-          <Button variant="default" asChild>
-            <Link href={ROUTES.PROFILE}>Profile</Link>
-          </Button>
+          {data && <UserMenuButton data={data} />}
           <LogoutButton onLogout={() => setIsAuthorized(false)} />
         </>
       ) : (

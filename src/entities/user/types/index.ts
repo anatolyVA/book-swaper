@@ -16,6 +16,7 @@ interface UserProfile {
   lastName: string;
   country: string;
   state: string;
+  avatarUrl?: string;
   city: string;
 }
 
