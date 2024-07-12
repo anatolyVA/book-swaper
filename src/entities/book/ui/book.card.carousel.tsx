@@ -19,13 +19,13 @@ export const BookCardCarousel = ({ className }: BookCardCarouselProps) => {
   return (
     <Carousel setApi={setApi}>
       <CarouselContent className={cn("min-h-[320px] flex-1", className)}>
-        <CarouselItem className="flex bg-gray-900 items-center justify-center">
+        <CarouselItem className="flex bg-primary/20 items-center justify-center">
           Img
         </CarouselItem>
-        <CarouselItem className="flex bg-gray-800 items-center justify-center">
+        <CarouselItem className="flex bg-primary/15 items-center justify-center">
           Img
         </CarouselItem>
-        <CarouselItem className="flex bg-gray-700 items-center justify-center">
+        <CarouselItem className="flex bg-primary/10 items-center justify-center">
           Img
         </CarouselItem>
       </CarouselContent>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { ROUTES } from "@/shared/config/routes";
+import { Logo } from "@/entities/logo";
 
 export default function SignInPage() {
   return (
@@ -11,14 +12,8 @@ export default function SignInPage() {
       <section
         className={`relative flex flex-col gap-4 p-12 justify-center items-center`}
       >
-        <Link href="/">
-          <Image
-            src="/logo.svg"
-            alt="black-logo"
-            width={180}
-            height={24}
-            className="absolute top-8 left-8"
-          />
+        <Link href="/" className="absolute top-4 left-8">
+          <Logo />
         </Link>
         <h2 className="text-center text-3xl font-bold text-primary">Sign In</h2>
         <LoginForm />

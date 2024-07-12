@@ -27,20 +27,21 @@ export const BookCard = ({ data, variant = "grid" }: BookCardProps) => {
       ? data.description.slice(0, 50) + "..."
       : data.description;
   return variant === "grid" ? (
-    <Card className="overflow-hidden">
-      <BookCardCarousel />
-      <CardFooter className="flex flex-col gap-4 items-start pt-4">
-        <div>
-          <h4 className="font-bold text-lg">{data.title}</h4>
-          <p>{descriptionSlice}</p>
-        </div>
-        <Button className="w-full">Swap</Button>
-        <Link href={`/books/${data.id}`}>Goto</Link>
-      </CardFooter>
-    </Card>
+    <Link href={`/books/${data.id}`}>
+      <Card className="flex flex-col overflow-hidden h-full">
+        <BookCardCarousel />
+        <CardFooter className="flex flex-col gap-4 items-start pt-4 flex-1">
+          <div className="flex flex-col flex-1">
+            <h4 className="font-bold text-lg">{data.title}</h4>
+            <p>{descriptionSlice}</p>
+          </div>
+          <Button className="w-full">Swap</Button>
+        </CardFooter>
+      </Card>
+    </Link>
   ) : (
     <article className="grid grid-cols-[3fr_9fr] gap-2">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 rounded-md overflow-hidden w-fit">
         <BookCardCarousel className="min-h-[120px] h-full" />
       </div>
       <main className={`flex flex-col gap-3`}>

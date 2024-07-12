@@ -17,8 +17,9 @@ import { Button } from "@/shared/ui/button";
 
 interface UserMenuButtonProps {
   data: User;
+  logoutButton: React.ReactNode;
 }
-export function UserMenuButton({ data }: UserMenuButtonProps) {
+export function UserMenuButton({ data, logoutButton }: UserMenuButtonProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -59,6 +60,7 @@ export function UserMenuButton({ data }: UserMenuButtonProps) {
         <DropdownMenuItem>
           <PlusIcon className="w-4 h-4 mr-1" /> Add book
         </DropdownMenuItem>
+        {logoutButton}
       </DropdownMenuContent>
     </DropdownMenu>
   );

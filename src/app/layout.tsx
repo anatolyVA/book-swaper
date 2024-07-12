@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geologica, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/widgets/header";
 import React from "react";
+import { ThemeProvider } from "@/app/providers";
 
+const montserrat = Montserrat({ subsets: ["latin"] });
+const geologica = Geologica({ subsets: ["latin"] });
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +21,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={geologica.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

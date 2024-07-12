@@ -80,7 +80,9 @@ interface BookImage {
 
 const createBookSchema = z.object({
   title: z.string().min(3).max(50),
-  authorId: z.string().min(1),
+  authorId: z
+    .string()
+    .refine((value) => !!value, { message: "Author is required" }),
   description: z.string().max(500),
   language: z.string().min(1),
   genre: z.nativeEnum(BookGenre),

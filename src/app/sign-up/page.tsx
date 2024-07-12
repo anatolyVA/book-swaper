@@ -5,6 +5,7 @@ import Image from "next/image";
 import { RegisterForm } from "@/features/register";
 import React from "react";
 import { ROUTES } from "@/shared/config/routes";
+import { Logo } from "@/entities/logo";
 
 export default function SignUpPage() {
   return (
@@ -13,14 +14,8 @@ export default function SignUpPage() {
       <section
         className={`relative flex flex-col gap-4 p-12 justify-center items-center`}
       >
-        <Link href="/">
-          <Image
-            src="/logo.svg"
-            alt="black-logo"
-            width={180}
-            height={24}
-            className="absolute top-8 left-8"
-          />
+        <Link href="/" className="absolute top-4 right-8">
+          <Logo />
         </Link>
         <h2 className="text-center text-3xl font-bold text-primary">Sign Up</h2>
         <RegisterForm />

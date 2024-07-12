@@ -6,6 +6,7 @@ import { User, userApi, UserMenuButton } from "@/entities/user";
 import Link from "next/link";
 import { LogoutButton } from "@/features/logout";
 import { ROUTES } from "@/shared/config/routes";
+import { ThemeToggle } from "@/features/theme-toggle/ui/theme.toggle";
 
 function HeaderRightSide() {
   const [data, setData] = React.useState<User | null>(null);
@@ -25,8 +26,17 @@ function HeaderRightSide() {
     <div className="flex gap-4 items-center">
       {isAuthorized && data ? (
         <>
-          {data && <UserMenuButton data={data} />}
-          <LogoutButton onLogout={() => setIsAuthorized(false)} />
+          {data && (
+            <UserMenuButton
+              data={data}
+              logoutButton={
+                <LogoutButton
+                  onLogout={() => setIsAuthorized(false)}
+                  asDropdownItem
+                />
+              }
+            />
+          )}
         </>
       ) : (
         <>
@@ -38,6 +48,7 @@ function HeaderRightSide() {
           </Button>
         </>
       )}
+      <ThemeToggle />
     </div>
   );
 }

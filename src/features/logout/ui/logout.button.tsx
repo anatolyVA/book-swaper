@@ -7,12 +7,14 @@ import { removeFromStorage } from "@/shared/lib/auth-tokens";
 import { logout } from "@/features/logout/api";
 import { usePathname, useRouter } from "next/navigation";
 import { PROTECTED_ROUTES, ROUTES } from "@/shared/config/routes";
+import { DropdownMenuItem } from "@/shared/ui/dropdown-menu";
 
 interface LogoutButtonProps {
   onLogout?: () => void;
+  asDropdownItem?: boolean;
 }
 
-export function LogoutButton({ onLogout }: LogoutButtonProps) {
+export function LogoutButton({ onLogout, asDropdownItem }: LogoutButtonProps) {
   const router = useRouter();
   const pathname = usePathname();
   const handleButtonClick = (e: React.MouseEvent) => {
@@ -26,7 +28,11 @@ export function LogoutButton({ onLogout }: LogoutButtonProps) {
       })
       .catch((err) => console.log(err));
   };
-  return (
+  return asDropdownItem ? (
+    <DropdownMenuItem onClick={handleButtonClick}>
+      <ExitIcon className="h-4 w-4 mr-1" /> Logout
+    </DropdownMenuItem>
+  ) : (
     <Button variant="outline" size="icon" onClick={handleButtonClick}>
       <ExitIcon />
     </Button>
