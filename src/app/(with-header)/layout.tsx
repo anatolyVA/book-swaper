@@ -1,4 +1,5 @@
 import { Header } from "@/widgets/header";
+import { Toaster } from "@/shared/ui/sonner";
 
 export default function WithHeaderLayout({
   children,
@@ -9,6 +10,7 @@ export default function WithHeaderLayout({
     <div>
       <Header />
       {children}
+      <Toaster />
     </div>
   );
 }

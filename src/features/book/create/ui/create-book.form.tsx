@@ -31,6 +31,7 @@ import {
 import { Button } from "@/shared/ui/button";
 import { api } from "@/shared/api/axios";
 import { Textarea } from "@/shared/ui/textarea";
+import { toast } from "sonner";
 
 export function CreateBookForm() {
   const [authors, setAuthors] = React.useState<Author[]>([]);
@@ -61,7 +62,7 @@ export function CreateBookForm() {
       .createBook(values)
       .then((data) => {
         form.reset();
-        console.log(data);
+        toast.success("Book created successfully");
       })
       .catch((err) => console.log(err));
   };
@@ -69,12 +70,28 @@ export function CreateBookForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-4"
+        className="flex flex-col gap-2"
       >
-        <div className="bg-gray-100 text-black h-[320px] w-[400px]">
-          Img uploader
+        <div className="grid grid-cols-2 gap-2">
+          <div className="flex border-2 border-dashed border-gray-200 justify-center items-center h-[120px] md:h-[220px] w-full">
+            Img preview uploader
+          </div>
+          <div className="grid gap-2 grid-cols-2">
+            <div className="flex border-2 border-dashed border-gray-200 justify-center items-center">
+              Img uploader
+            </div>
+            <div className="flex border-2 border-dashed border-gray-200 justify-center items-center">
+              Img uploader
+            </div>
+            <div className="flex border-2 border-dashed border-gray-200 justify-center items-center">
+              Img uploader
+            </div>
+            <div className="flex border-2 border-dashed border-gray-200 justify-center items-center">
+              Img uploader
+            </div>
+          </div>
         </div>
-        <div className="grid gap-4">
+        <div className="grid grid-cols-2 gap-2">
           <FormField
             control={form.control}
             name="title"
@@ -85,39 +102,6 @@ export function CreateBookForm() {
                   <Input
                     type="text"
                     placeholder="Enter book title"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Enter description of your book"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="language"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Language</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="Select book language"
                     {...field}
                   />
                 </FormControl>
@@ -145,6 +129,39 @@ export function CreateBookForm() {
                     ))}
                   </SelectContent>
                 </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Enter description of your book"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="language"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Language</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder="Select book language"
+                    {...field}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -227,7 +244,9 @@ export function CreateBookForm() {
               </FormItem>
             )}
           />
-          <Button type="submit">Create book</Button>
+          <Button className="col-span-2 mt-2" type="submit">
+            Create book
+          </Button>
         </div>
       </form>
     </Form>

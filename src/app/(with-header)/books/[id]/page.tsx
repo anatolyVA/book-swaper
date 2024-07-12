@@ -26,7 +26,7 @@ export default async function BookPage({ params }: BookPageProps) {
   const { author } = data;
   //<BookCardCarousel className="flex-1 min-h-full min-w-[30rem]" />
   return (
-    <main className="flex flex-col pt-8 pb-12 gap-8 min-h-[calc(100vh-70px)] container">
+    <main className="flex flex-col pt-8 pb-12 gap-8 min-h-[calc(100vh-70px)] container px-12">
       <div className="flex flex-col lg:flex-row flex-1">
         <section className="mb-4 lg:mr-10 w-full sm:w-[404px] lg:w-auto m-auto lg:m-0">
           <AlbumCard className="" />

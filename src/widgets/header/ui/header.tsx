@@ -9,7 +9,7 @@ import { ThemeToggle } from "@/features/theme-toggle/ui/theme.toggle";
 
 export async function Header() {
   return (
-    <header className="sticky top-0 z-50 flex justify-between items-center py-3 px-12 h-[70px] bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-50 flex justify-between items-center py-3 px-12 h-[70px] bg-background/90 backdrop-blur">
       <div className="flex items-center">
         <Link href={ROUTES.HOME} className="mr-8">
           <Logo />
