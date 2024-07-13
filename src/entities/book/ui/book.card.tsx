@@ -8,6 +8,7 @@ import { Book } from "@/entities/book";
 import { Card, CardContent, CardFooter } from "@/shared/ui/card";
 import Link from "next/link";
 import { ROUTES } from "@/shared/config/routes";
+import { SwapBookModal } from "@/features/book/create";
 
 interface BookCardProps {
   data: Book;
@@ -15,14 +16,6 @@ interface BookCardProps {
 }
 
 export const BookCard = ({ data, variant = "grid" }: BookCardProps) => {
-  const tags = [
-    data.condition,
-    data.genre,
-    data.coverType,
-    data.status,
-    data.language,
-  ];
-
   const descriptionSlice: string =
     data.description.length >= 50
       ? data.description.slice(0, 50) + "..."
@@ -35,15 +28,24 @@ export const BookCard = ({ data, variant = "grid" }: BookCardProps) => {
           <h4 className="font-bold text-lg">{data.title}</h4>
           <p>{descriptionSlice}</p>
         </div>
+
+        <SwapBookModal
+          trigger={<Button className="w-full">Swap</Button>}
+          triggerAsChild
+          requestedBook={data}
+        />
+        {/*
         <Button
           onClick={(e) => {
             e.preventDefault();
             alert("clicked");
           }}
-          className="w-full"
+
         >
           Swap
         </Button>
+
+         */}
       </CardFooter>
     </Card>
   ) : (

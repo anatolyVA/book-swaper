@@ -39,6 +39,8 @@ class BookApi {
     const { data } = await apiWithAuth.post<Book>(this.URL, values);
     return data;
   }
+
+  async swapBooks(id: string) {}
 }
 
 export const bookApi = new BookApi();

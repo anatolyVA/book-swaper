@@ -36,7 +36,7 @@ export function UserMenuButton({
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <span className="text-sm">
+            <span className="text-sm text-left">
               {getInitials(data.profile.firstName, data.profile.lastName)}
             </span>
             <span className="text-xs text-muted-foreground">{data.email}</span>

@@ -102,9 +102,19 @@ const updateBookSchema = z.object({
   condition: z.nativeEnum(BookCondition).optional(),
 });
 
+const swapBookSchema = z.object({
+  offeringBookId: z
+    .string()
+    .refine((value) => !!value, { message: "Offering book is required" }),
+  requestedBookId: z
+    .string()
+    .refine((value) => !!value, { message: "Requested book is required" }),
+});
+
 export {
   createBookSchema,
   updateBookSchema,
+  swapBookSchema,
   type Book,
   BookCoverType,
   BookCondition,
