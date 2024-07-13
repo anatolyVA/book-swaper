@@ -15,6 +15,16 @@ class BookApi {
     return data;
   }
 
+  async getBooksByUserId(id: string) {
+    const { data } = await api.get<Book[]>(`/users/${id}/books`);
+    return data;
+  }
+
+  async getCurrentUserBooks() {
+    const { data } = await apiWithAuth.get<Book[]>(`/users/me/books`);
+    return data;
+  }
+
   async deleteBook(id: string) {
     const { data } = await apiWithAuth.delete<Book>(`${this.URL}/${id}`);
     return data;

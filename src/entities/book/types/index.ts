@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { User } from "@/entities/user";
 
 interface Book {
   id: string;
@@ -14,6 +15,7 @@ interface Book {
   status: BookStatus;
 
   author: Author;
+  owner: User;
   images: BookImage[];
 
   createdAt: string;
