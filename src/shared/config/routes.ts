@@ -5,6 +5,7 @@ export enum ROUTES {
   PROFILE = "/i",
   USER_BOOKS = "/i/books",
   USER_SWAPS = "/i/swaps",
+  USER_SETTINGS = "/i/settings",
   BOOKS = "/books",
   BOOK = "/books/:id",
 }

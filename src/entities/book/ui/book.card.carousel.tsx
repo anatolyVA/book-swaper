@@ -9,15 +9,21 @@ import {
   CarouselNext,
 } from "@/shared/ui/carousel";
 import React from "react";
-import { cn } from "@/shared/lib/utils";
+import { cn, convertPathToUrl } from "@/shared/lib/utils";
 import Link from "next/link";
+import { BookImage } from "@/entities/book";
+import Image from "next/image";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+import { Card, CardContent } from "@/shared/ui/card";
 
 interface BookCardCarouselProps {
+  data: BookImage[];
   className?: string;
   href: string;
 }
 
 export const BookCardCarousel = ({
+  data,
   className,
   href,
 }: BookCardCarouselProps) => {
@@ -29,6 +35,7 @@ export const BookCardCarousel = ({
     if (!api) {
       return;
     }
+    console.log(data);
 
     setCount(api.scrollSnapList());
     setCurrent(api.selectedScrollSnap());
@@ -39,35 +46,49 @@ export const BookCardCarousel = ({
   }, [api]);
 
   return (
-    <Link href={href} className="relative">
-      <Carousel setApi={setApi}>
-        <CarouselContent className={cn("h-72 flex-1", className)}>
-          <CarouselItem className="flex bg-primary/20 items-center justify-center">
-            Img
-          </CarouselItem>
-          <CarouselItem className="flex bg-primary/15 items-center justify-center">
-            Img
-          </CarouselItem>
-          <CarouselItem className="flex bg-primary/10 items-center justify-center">
-            Img
-          </CarouselItem>
-        </CarouselContent>
-      </Carousel>
-      <div className="py-1 text-center absolute bottom-2 right-4 space-x-0.5">
-        {count.map((i, index) => (
-          <button
-            key={index}
-            className={cn(
-              "w-2 h-2 rounded-full",
-              current === index ? "bg-primary" : "bg-primary/30",
-            )}
-            onClick={(e) => {
-              e.preventDefault();
-              api?.scrollTo(index);
-            }}
-          ></button>
-        ))}
+    <div className="flex flex-col gap-1">
+      <Link href={href} className="flex-1">
+        <Carousel
+          setApi={setApi}
+          plugins={[
+            WheelGesturesPlugin({
+              forceWheelAxis: "y",
+            }),
+          ]}
+        >
+          <CarouselContent className={cn("h-[24rem] flex-1", className)}>
+            {data.map((image) => (
+              <CarouselItem
+                key={image.id}
+                className="relative bg-secondary dark:bg-secondary/20"
+              >
+                <Image
+                  src={convertPathToUrl(image.path)}
+                  alt={image.id}
+                  fill
+                  className="object-contain"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </Link>
+      <div className="flex gap-0.5 justify-center mt-1">
+        {count.length > 1 &&
+          count.map((i, index) => (
+            <button
+              key={index}
+              className={cn(
+                "w-2 h-2 rounded-full",
+                current === index ? "bg-primary" : "bg-primary/30",
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                api?.scrollTo(index);
+              }}
+            ></button>
+          ))}
       </div>
-    </Link>
+    </div>
   );
 };

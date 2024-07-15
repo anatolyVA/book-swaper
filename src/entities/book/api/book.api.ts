@@ -35,12 +35,14 @@ class BookApi {
     return data;
   }
 
-  async createBook(values: z.infer<typeof createBookSchema>) {
-    const { data } = await apiWithAuth.post<Book>(this.URL, values);
+  async createBook(values: FormData) {
+    const { data } = await apiWithAuth.post<Book>(this.URL, values, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return data;
   }
-
-  async swapBooks(id: string) {}
 }
 
 export const bookApi = new BookApi();

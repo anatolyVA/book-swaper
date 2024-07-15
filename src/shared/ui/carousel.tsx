@@ -159,13 +159,13 @@ const CarouselContent = React.forwardRef<
   return (
     <div
       ref={carouselRef}
-      className="flex overflow-hidden rounded-lg min-h-full"
+      className="flex overflow-hidden rounded-lg min-h-full flex-1"
     >
       <div
         ref={ref}
         className={cn(
           "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+          orientation === "horizontal" ? "" : "flex-col",
           className,
         )}
         {...props}

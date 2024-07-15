@@ -30,6 +30,7 @@ import {
   getCountryCodeByName,
   getStateCodeByName,
 } from "@/features/register/lib/helpers";
+import { toast } from "sonner";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -90,10 +91,18 @@ export function RegisterForm() {
   }, [watchCountry, watchState, countries, states]);
 
   const onSubmit = async (data: z.infer<typeof createUserSchema>) => {
-    await register(data).then(({ access_token }) => {
-      saveTokenStorage(access_token);
-      router.push("/books");
-    });
+    await register(data)
+      .then(({ access_token }) => {
+        saveTokenStorage(access_token);
+        router.push("/books");
+        toast.success("Welcome!");
+      })
+      .catch((err) => {
+        const data = err?.response?.data;
+        const message = data?.message || "Something went wrong";
+        toast.error(message);
+        console.log(data);
+      });
   };
   return (
     <Form {...form}>

@@ -32,10 +32,21 @@ export function LoginForm() {
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     const { email, password } = data;
-    await login(email, password).then(({ access_token }) => {
-      saveTokenStorage(access_token);
-      router.push("/books");
-    });
+    await login(email, password)
+      .then(({ access_token }) => {
+        saveTokenStorage(access_token);
+        toast.success("Welcome back!");
+        router.push("/books");
+      })
+      .catch((err) => {
+        const data = err?.response?.data;
+        const message =
+          (data?.statusCode === 401 && "Wrong email or password") ||
+          data?.message ||
+          "Something went wrong";
+        toast.error(message);
+        console.log(data);
+      });
   };
   return (
     <Form {...form}>

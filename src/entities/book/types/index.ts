@@ -1,6 +1,11 @@
 import { z } from "zod";
 import { User } from "@/entities/user";
 
+interface Language {
+  code: string;
+  name: string;
+}
+
 interface Book {
   id: string;
   authorId: string; // can be ignored
@@ -8,7 +13,7 @@ interface Book {
 
   title: string;
   description: string;
-  language: string;
+  languageCode: string;
   genre: BookGenre;
   coverType: BookCoverType;
   condition: BookCondition;
@@ -17,6 +22,7 @@ interface Book {
   author: Author;
   owner: User;
   images: BookImage[];
+  language: Language;
 
   createdAt: string;
   updatedAt: string;
@@ -77,7 +83,7 @@ interface BookImage {
   bookId: string;
 
   isPreview: boolean;
-  url: string;
+  path: string;
 }
 
 const createBookSchema = z.object({
@@ -86,40 +92,32 @@ const createBookSchema = z.object({
     .string()
     .refine((value) => !!value, { message: "Author is required" }),
   description: z.string().max(500),
-  language: z.string().min(1),
+  languageCode: z.string().min(1),
   genre: z.nativeEnum(BookGenre),
   coverType: z.nativeEnum(BookCoverType),
   condition: z.nativeEnum(BookCondition),
+  images: z.instanceof(File).array().min(1).max(5),
 });
 
 const updateBookSchema = z.object({
   title: z.string().min(3).max(50).optional(),
   authorId: z.string().min(1).optional(),
   description: z.string().max(500).optional(),
-  language: z.string().min(1).optional(),
+  languageCode: z.string().min(1).optional(),
   genre: z.nativeEnum(BookGenre).optional(),
   coverType: z.nativeEnum(BookCoverType).optional(),
   condition: z.nativeEnum(BookCondition).optional(),
 });
 
-const swapBookSchema = z.object({
-  offeringBookId: z
-    .string()
-    .refine((value) => !!value, { message: "Offering book is required" }),
-  requestedBookId: z
-    .string()
-    .refine((value) => !!value, { message: "Requested book is required" }),
-});
-
 export {
   createBookSchema,
   updateBookSchema,
-  swapBookSchema,
   type Book,
   BookCoverType,
   BookCondition,
   BookStatus,
   BookGenre,
+  type Language,
   type Author,
   type BookImage,
 };

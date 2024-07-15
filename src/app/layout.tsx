@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/widgets/header";
 import React from "react";
 import { ThemeProvider } from "@/app/providers";
+import { Toaster } from "@/shared/ui/sonner";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 const geologica = Geologica({ subsets: ["latin"] });
@@ -29,6 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

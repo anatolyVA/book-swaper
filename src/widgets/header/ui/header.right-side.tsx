@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { Button } from "@/shared/ui/button";
-import { User, userApi, UserMenuButton } from "@/entities/user";
+import { useProfile, User, userApi, UserMenuButton } from "@/entities/user";
 import Link from "next/link";
 import { LogoutButton } from "@/features/logout";
 import { ROUTES } from "@/shared/config/routes";
@@ -12,29 +12,25 @@ import { PlusIcon } from "lucide-react";
 import { CreateBookModal } from "@/features/book/create";
 
 function HeaderRightSide() {
-  const [data, setData] = React.useState<User | null>(null);
-  const [isAuthorized, setIsAuthorized] = React.useState(false);
+  const fetchProfile = useProfile((state) => state.fetchProfile);
+  const profile = useProfile((state) => state.profile);
+  const isAuthorized = useProfile((state) => state.isAuthorized);
+  const setIsAuthorized = useProfile((state) => state.setIsAuthorized);
 
   useEffect(() => {
-    userApi
-      .getCurrentUser()
-      .then((data) => {
-        setIsAuthorized(true);
-        setData(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    fetchProfile();
+  }, [isAuthorized]);
 
   return (
     <div className="flex gap-2 items-center">
-      {isAuthorized && data ? (
+      {profile ? (
         <>
-          {data && (
+          {profile && (
             <UserMenuButton
-              data={data}
+              data={profile}
               logoutButton={
                 <LogoutButton
-                  onLogout={() => setIsAuthorized(false)}
+                  onLogout={() => setIsAuthorized?.(false)}
                   asDropdownItem
                 />
               }

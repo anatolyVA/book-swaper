@@ -10,7 +10,6 @@ export default function WithHeaderLayout({
     <div>
       <Header />
       {children}
-      <Toaster />
     </div>
   );
 }

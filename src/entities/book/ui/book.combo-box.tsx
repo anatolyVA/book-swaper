@@ -31,7 +31,7 @@ export function BookComboBox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>{trigger}</PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0" align="start">
+        <PopoverContent className="w-[200px] p-0" align="start" side="right">
           <BookList
             data={books}
             setOpen={setOpen}
