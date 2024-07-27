@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Input } from "@/shared/ui/input";
 import Image from "next/image";
 import { Button } from "@/shared/ui/button";
-import { PlusIcon, UploadIcon } from "lucide-react";
+import { PlusIcon, UploadIcon, X } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { className } from "postcss-selector-parser";
 

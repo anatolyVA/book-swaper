@@ -1,5 +1,6 @@
 import { Header } from "@/widgets/header";
 import { Toaster } from "@/shared/ui/sonner";
+import React from "react";
 
 export default function WithHeaderLayout({
   children,
@@ -7,7 +8,7 @@ export default function WithHeaderLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="min-h-screen">
       <Header />
       {children}
     </div>

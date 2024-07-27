@@ -92,11 +92,17 @@ const createBookSchema = z.object({
     .string()
     .refine((value) => !!value, { message: "Author is required" }),
   description: z.string().max(500),
-  languageCode: z.string().min(1),
+  languageCode: z
+    .string()
+    .refine((value) => !!value, { message: "Language is required" }),
   genre: z.nativeEnum(BookGenre),
   coverType: z.nativeEnum(BookCoverType),
   condition: z.nativeEnum(BookCondition),
-  images: z.instanceof(File).array().min(1).max(5),
+  images: z
+    .instanceof(File)
+    .array()
+    .min(1, { message: "Please, upload at least one image" })
+    .max(5, { message: "Please, upload no more than 5 images" }),
 });
 
 const updateBookSchema = z.object({

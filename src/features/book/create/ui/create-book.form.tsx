@@ -47,9 +47,6 @@ export function CreateBookForm() {
       description: "",
       languageCode: "",
       authorId: "",
-      genre: BookGenre.HORROR,
-      coverType: BookCoverType.HARD_COVER,
-      condition: BookCondition.NEW,
       images: [],
     },
   });
@@ -83,29 +80,23 @@ export function CreateBookForm() {
   }, [imagesWatch]);
 
   const onSubmit = async (values: z.infer<typeof createBookSchema>) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("description", values.description);
-    formData.append("languageCode", values.languageCode);
-    formData.append("authorId", values.authorId);
-    formData.append("genre", values.genre);
-    formData.append("coverType", values.coverType);
-    formData.append("condition", values.condition);
+    const { images, ...rest } = values;
 
-    values.images.forEach((image, index) => {
-      formData.append(`images`, image);
+    bookApi.createBook(rest).then((data) => {
+      bookApi
+        .uploadImages(data.id, images)
+        .then((data) => {
+          console.log(data);
+          toast.success("Book created");
+        })
+        .catch((err) => {
+          console.log(err.response);
+          toast.error("Unable to upload images");
+        })
+        .catch(() => {
+          toast.error("Unable to create book");
+        });
     });
-
-    await bookApi
-      .createBook(formData)
-      .then(() => {
-        form.reset();
-        toast.success("Book created successfully");
-      })
-      .catch((err) => {
-        const message = err?.response?.data?.message;
-        toast.error(message || "Something went wrong");
-      });
   };
 
   return (
@@ -119,7 +110,7 @@ export function CreateBookForm() {
             control={form.control}
             name="images"
             render={({ field }) => (
-              <FormItem className="flex flex-col justify-center md:justify-start">
+              <FormItem className="flex flex-col gap-1 justify-center md:justify-start">
                 <FormControl>
                   <UploadImages value={field.value} onChange={field.onChange} />
                 </FormControl>
@@ -293,7 +284,7 @@ export function CreateBookForm() {
           />
 
           <Button className="col-span-2 mt-2" type="submit">
-            Create book
+            Add book
           </Button>
         </div>
       </form>
@@ -333,11 +324,11 @@ function UploadImages({ value, onChange }: UploadImagesProps) {
     setAdditional([...additional, additional.length + 1]);
   };
   return (
-    <div className="grid grid-cols-2 gap-2 md:h-[calc(20rem+0.5rem)] w-[440px]">
+    <div className="grid grid-cols-2 gap-2 md:h-[calc(20rem+0.5rem)] w-[320px] sm:w-[440px]">
       <ImageUploader
         value={images[0]}
         onChange={(file) => handleChange(file, 0)}
-        className="h-80 md:h-full"
+        className="h-56 sm:h-80 md:h-full"
       />
       <div className="grid gap-2 grid-cols-2 grid-rows-2">
         {additional.map((i) => (
@@ -345,12 +336,12 @@ function UploadImages({ value, onChange }: UploadImagesProps) {
             key={i}
             value={images[i]}
             onChange={(file) => handleChange(file, i)}
-            className="h-38"
+            className="h-[6.75rem] sm:h-40"
           />
         ))}
         {additional.length < 4 && (
           <Button
-            className="border-dashed flex flex-col h-38"
+            className="border-dashed flex flex-col h-[6.75rem] sm:h-40"
             variant="secondary"
             type="button"
             onClick={handleAddUploader}

@@ -1,19 +1,20 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/shared/ui/button";
+import { Button, ButtonProps } from "@/shared/ui/button";
 import useStore from "@/shared/lib/use-store";
 import { useProfile } from "@/entities/user";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/shared/config/routes";
 
-export function CreateSwapButton({
-  className,
-  onClick,
-}: {
-  className?: string;
+interface CreateSwapRequestButtonProps extends ButtonProps {
   onClick?: (e: React.MouseEvent) => void;
-}) {
+}
+
+export const CreateSwapRequestButton = React.forwardRef<
+  HTMLButtonElement,
+  CreateSwapRequestButtonProps
+>(({ onClick, ...props }, ref) => {
   const isAuthorized = useStore(useProfile, (state) => state.isAuthorized);
   const router = useRouter();
 
@@ -25,10 +26,11 @@ export function CreateSwapButton({
     }
     onClick?.(e);
   };
-
   return (
-    <Button onClick={handleClick} className={className}>
+    <Button ref={ref} onClick={onClick} {...props}>
       Swap
     </Button>
   );
-}
+});
+
+CreateSwapRequestButton.displayName = "CreateSwapRequestButton";

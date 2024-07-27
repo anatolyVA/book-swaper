@@ -7,13 +7,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { User } from "@/entities/user";
-import { getInitials } from "@/shared/lib/utils";
+import { convertPathToUrl, getInitials } from "@/shared/lib/utils";
 import { ArrowRightLeft, LibraryIcon, PlusIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/shared/config/routes";
 import { Button } from "@/shared/ui/button";
+import { UserAvatar } from "./user.avatar";
 
 interface UserMenuButtonProps {
   data: User;
@@ -29,13 +29,8 @@ export function UserMenuButton({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex gap-2 items-center cursor-pointer hover:opacity-80 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-          <Avatar>
-            <AvatarImage src={data.profile.avatarUrl} alt="@shadcn" />
-            <AvatarFallback>
-              {data.profile.firstName[0] + data.profile.lastName[0]}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
+          <UserAvatar data={data.profile} />
+          <div className="hidden md:flex flex-col">
             <span className="text-sm text-left">
               {getInitials(data.profile.firstName, data.profile.lastName)}
             </span>

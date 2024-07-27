@@ -6,6 +6,8 @@ import { BookCharacteristicList } from "@/widgets/book-characteristic";
 import { SimilarBookList } from "@/widgets/similar-books";
 import { HEADER_HEIGHT } from "@/shared/config/const";
 import { BookAlbum } from "@/widgets/book-album";
+import { BookControls } from "@/widgets/book-controls";
+import { AddToFavoriteButton } from "@/features/book/add-to-favorite";
 
 interface BookPageProps {
   params: {
@@ -24,6 +26,14 @@ export default async function BookPage({ params }: BookPageProps) {
       notFound();
     });
 
+  const similarBooks = await bookApi
+    .getSimilarBooks(id)
+    .then((data) => data)
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
+
   return (
     <main
       className="flex flex-col pt-8 pb-12 gap-8 container px-8"
@@ -31,12 +41,17 @@ export default async function BookPage({ params }: BookPageProps) {
         minHeight: `calc(100dvh - ${HEADER_HEIGHT})`,
       }}
     >
-      <div className="flex flex-col lg:flex-row">
-        <BookAlbum data={data} />
-        <BookCharacteristicList data={data} />
-      </div>
+      <div className="grid lg:grid-cols-[6fr_4fr] gap-8">
+        <BookAlbum book={data} />
+        <div className="flex flex-col gap-4 relative">
+          <AddToFavoriteButton className="absolute top-4 right-4" />
+          <BookCharacteristicList book={data} className="flex-1" />
 
-      <SimilarBookList tags={getBookTags(data)} />
+          {/* TODO: replace this */}
+          <BookControls book={data} className="self-center" />
+        </div>
+      </div>
+      <SimilarBookList data={similarBooks} />
     </main>
   );
 }

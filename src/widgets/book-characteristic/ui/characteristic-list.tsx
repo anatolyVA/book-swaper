@@ -1,55 +1,58 @@
+"use client";
+
 import React from "react";
-import { beautifyValue, getInitials } from "@/shared/lib/utils";
-import { Book } from "@/entities/book";
+import { beautifyValue, cn, getInitials } from "@/shared/lib/utils";
+import {
+  Book,
+  BookCharacteristicValue,
+  BookStatusBadge,
+} from "@/entities/book";
+import { useProfile, UserInfo } from "@/entities/user";
+import { Badge } from "@/shared/ui/badge";
 
 interface BookCharacteristicListProps {
-  data: Book;
+  book: Book;
+  className?: string;
 }
 
-export function BookCharacteristicList({ data }: BookCharacteristicListProps) {
-  const { author } = data;
+export function BookCharacteristicList({
+  book,
+  className,
+}: BookCharacteristicListProps) {
+  const { author, owner } = book;
+
+  const location = `${owner.profile.city === "" ? owner.profile.state : owner.profile.city}, ${owner.profile.country}`;
 
   return (
-    <section className="flex flex-col gap-6 w-full">
+    <section className={cn("flex flex-col gap-6 w-full", className)}>
       <header>
-        <h1 className="text-primary text-2xl font-bold">{data.title}</h1>
+        <BookStatusBadge status={book.status} />
+        <h1 className="text-primary text-2xl font-bold mr-16">{book.title}</h1>
         <span className="text-lg">
           {getInitials(author.firstName, author.lastName, author.patronym)}
         </span>
       </header>
       <main className="flex flex-col gap-4">
-        <div className="grid lg:grid-cols-2 gap-2 lg:gap-4 max-w-[600px]">
-          <CharacteristicValue name="Condition" value={data.condition} />
-          <CharacteristicValue name="Genre" value={data.genre} />
-          <CharacteristicValue name="Cover type" value={data.coverType} />
-          <CharacteristicValue name="Status" value={data.status} />
-          <CharacteristicValue name="Language" value={data.language.name} />
+        <div className="grid lg:grid-cols-2 gap-2 lg:gap-4 lg:w-[330px]">
+          <BookCharacteristicValue
+            name="Owner`s location"
+            disableBeautify
+            value={location}
+            className="col-span-2"
+          />
+          <BookCharacteristicValue name="Condition" value={book.condition} />
+          <BookCharacteristicValue name="Genre" value={book.genre} />
+          <BookCharacteristicValue name="Cover type" value={book.coverType} />
+          <BookCharacteristicValue name="Language" value={book.language.name} />
         </div>
-        <CharacteristicValue
+        <BookCharacteristicValue
           name="Description"
-          value={`${data.description}`}
-          className=""
+          disableBeautify
+          value={`${book.description}`}
+          className="flex-col"
         />
+        <UserInfo user={owner} />
       </main>
     </section>
-  );
-}
-
-function CharacteristicValue({
-  name,
-  value,
-  className,
-}: {
-  name: string;
-  value: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`flex ${name === "Description" ? "flex-col" : "xl:flex-col"} ${className}`}
-    >
-      <span className="mr-1 font-bold text-gray-400">{name}:</span>
-      <p>{beautifyValue(value.toString())}</p>
-    </div>
   );
 }

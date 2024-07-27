@@ -13,7 +13,7 @@ export default async function Home() {
           minHeight: `calc(100dvh - ${HEADER_HEIGHT})`,
         }}
       >
-        <header className="flex items-center bg-secondary dark:bg-secondary/20 w-full h-[30rem]">
+        <header className="flex items-center bg-muted/40 w-full h-[30rem]">
           <div className="flex flex-col container items-center gap-8 text-center">
             <h1 className="text-4xl lg:text-5xl">Lorem ipsum dolor sit amet</h1>
             <p className="text-center w-[300px] md:w-1/2">
@@ -43,7 +43,7 @@ export default async function Home() {
           minHeight: `calc(100dvh - ${HEADER_HEIGHT})`,
         }}
       >
-        <header className="bg-secondary dark:bg-secondary/20 w-full h-[11rem] flex items-center"></header>
+        <header className="bg-muted/40 w-full h-[11rem] flex items-center"></header>
         <main className="grid container items-center flex-1 py-16">
           <div>
             <h2 className="text-2xl font-semibold">About us</h2>
@@ -94,7 +94,7 @@ export default async function Home() {
           minHeight: `calc(100dvh - ${HEADER_HEIGHT})`,
         }}
       >
-        <header className="bg-secondary dark:bg-secondary/20 w-full h-[11rem] flex items-center"></header>
+        <header className="bg-muted/40 w-full h-[11rem] flex items-center"></header>
         <main className="grid container items-center flex-1 py-8">
           <div className="flex flex-col items-center">
             <h2 className="text-2xl font-semibold">

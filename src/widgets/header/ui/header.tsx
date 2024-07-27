@@ -8,6 +8,7 @@ import { Logo } from "@/entities/logo";
 import { ThemeToggle } from "@/features/theme-toggle/ui/theme.toggle";
 import { HEADER_HEIGHT } from "@/shared/config/const";
 import { cn } from "@/shared/lib/utils";
+import { HeaderNav } from "./header.nav";
 
 export async function Header() {
   return (
@@ -19,22 +20,7 @@ export async function Header() {
         minHeight: HEADER_HEIGHT,
       }}
     >
-      <div className="flex items-center">
-        <Link href={ROUTES.HOME} className="mr-8">
-          <Logo className="hidden md:block" />
-        </Link>
-        <div className="md:flex gap-2 hidden">
-          <Button size="default" asChild variant="link">
-            <Link href={ROUTES.BOOKS}>Books</Link>
-          </Button>
-          <Button size="default" asChild variant="link">
-            <Link href={`${ROUTES.HOME}/#about-us`}>About us</Link>
-          </Button>
-          <Button size="default" asChild variant="link">
-            <Link href={`${ROUTES.HOME}/#support-form`}>Support</Link>
-          </Button>
-        </div>
-      </div>
+      <HeaderNav />
       <HeaderRightSide />
     </header>
   );

@@ -10,8 +10,6 @@ interface BookCardAlbumProps {
   data: BookImage[];
 }
 
-const images: string[] = ["img 1", "img 2", "img 3", "img 4", "img 5"]; //это потом на удаление
-
 export function AlbumCard({ className, data }: BookCardAlbumProps) {
   const previewImageId = data.find((value) => value.isPreview)?.id;
 
@@ -45,8 +43,13 @@ export function AlbumCard({ className, data }: BookCardAlbumProps) {
   const currentImage = data.find((item) => item.id === image);
 
   return (
-    <div className={cn("", className)}>
-      <div className="relative min-h-[30rem] overflow-hidden rounded-md w-full lg:min-w-[25rem] flex justify-center items-center bg-secondary dark:bg-secondary/20 text-black mb-2">
+    <div className={cn("flex flex-col-reverse lg:flex-row gap-2", className)}>
+      {data.length > 1 && (
+        <div className="grid grid-cols-5 lg:grid-cols-1 lg:grid-rows-5 gap-2 w-full lg:w-[8rem] min-h-[4rem]">
+          {buttons}
+        </div>
+      )}
+      <div className="relative h-[30rem] overflow-hidden rounded-md w-full lg:min-w-[25rem] flex justify-center items-center bg-secondary dark:bg-secondary/20 text-black mb-2">
         <Image
           src={convertPathToUrl(currentImage?.path || "")}
           alt={currentImage?.id || ""}
@@ -54,9 +57,6 @@ export function AlbumCard({ className, data }: BookCardAlbumProps) {
           fill
         />
       </div>
-      {data.length > 1 && (
-        <div className="grid gap-1 grid-cols-5 h-[8rem]">{buttons}</div>
-      )}
     </div>
   );
 }

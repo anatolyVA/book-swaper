@@ -29,7 +29,7 @@ export function BookComboBox({
 
   if (isDesktop) {
     return (
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover modal open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>{trigger}</PopoverTrigger>
         <PopoverContent className="w-[200px] p-0" align="start" side="right">
           <BookList
@@ -45,7 +45,7 @@ export function BookComboBox({
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer modal open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">

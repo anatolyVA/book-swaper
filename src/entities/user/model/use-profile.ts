@@ -7,7 +7,7 @@ import { User, userApi } from "@/entities/user";
 interface UseProfileState {
   isAuthorized: boolean;
   setIsAuthorized: (isAuthorized: boolean) => void;
-  profile: User | null;
+  profile?: User;
   fetchProfile: () => void;
 }
 
@@ -17,12 +17,14 @@ export const useProfile = create(
       isAuthorized: false,
       setIsAuthorized: (isAuthorized) =>
         set((state) => ({ ...state, isAuthorized })),
-      profile: null,
+      profile: undefined,
       fetchProfile: async () => {
         await userApi
           .getCurrentUser()
           .then((data) => set(() => ({ profile: data, isAuthorized: true })))
-          .catch(() => set(() => ({ profile: null, isAuthorized: false })));
+          .catch(() =>
+            set(() => ({ profile: undefined, isAuthorized: false })),
+          );
       },
     }),
     {

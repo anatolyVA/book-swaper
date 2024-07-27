@@ -1,14 +1,14 @@
 import React from "react";
 import { FormModal } from "@/shared/ui/form.modal";
 import { Book } from "@/entities/book";
-import { CreateSwapForm } from "./create-swap.form";
+import { CreateSwapRequestForm } from "./create-swap-request.form";
 
 interface SwapBookModalProps {
   trigger: React.ReactNode;
   triggerAsChild?: boolean;
   requestedBook: Book;
 }
-export function CreateSwapModal({
+export function CreateSwapRequestModal({
   trigger,
   triggerAsChild,
   requestedBook,
@@ -17,8 +17,8 @@ export function CreateSwapModal({
     <FormModal
       trigger={trigger}
       triggerAsChild={triggerAsChild}
-      form={<CreateSwapForm requestedBook={requestedBook} />}
-      title={"Swap Book"}
+      form={<CreateSwapRequestForm requestedBook={requestedBook} />}
+      title={"Create swap request"}
     />
   );
 }

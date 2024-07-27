@@ -94,7 +94,7 @@ export function RegisterForm() {
     await register(data)
       .then(({ access_token }) => {
         saveTokenStorage(access_token);
-        router.push("/books");
+        router.back();
         toast.success("Welcome!");
       })
       .catch((err) => {

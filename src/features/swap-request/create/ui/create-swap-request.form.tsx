@@ -25,20 +25,24 @@ import {
 import { Badge } from "@/shared/ui/badge";
 import { swapApi, swapBookSchema } from "@/entities/swap";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
-import { User } from "@/entities/user";
+import { User, UserInfo } from "@/entities/user";
 import Image from "next/image";
+import {
+  createSwapRequestSchema,
+  swapRequestAPI,
+} from "@/entities/swap-requests";
 
 interface SwapBookProps {
   requestedBook: Book;
 }
 
-export const CreateSwapForm = ({ requestedBook }: SwapBookProps) => {
+export const CreateSwapRequestForm = ({ requestedBook }: SwapBookProps) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const form = useForm<z.infer<typeof swapBookSchema>>({
-    resolver: zodResolver(swapBookSchema),
+  const form = useForm<z.infer<typeof createSwapRequestSchema>>({
+    resolver: zodResolver(createSwapRequestSchema),
     defaultValues: {
-      offeringBookId: "",
+      offeredBookId: "",
       requestedBookId: requestedBook.id,
     },
   });
@@ -47,16 +51,16 @@ export const CreateSwapForm = ({ requestedBook }: SwapBookProps) => {
     bookApi.getCurrentUserBooks().then(setBooks);
   }, []);
 
-  const onSubmit = async (values: z.infer<typeof swapBookSchema>) => {
-    await swapApi
-      .createSwap(values)
+  const onSubmit = async (values: z.infer<typeof createSwapRequestSchema>) => {
+    await swapRequestAPI
+      .create(values)
       .then((data) => {
         form.reset();
         toast.success("Swap requested successfully");
       })
       .catch(({ response }) => {
         console.log(response);
-        toast.error(response.data.message);
+        toast.error(response.data.message || "Something went wrong");
       });
   };
 
@@ -67,10 +71,10 @@ export const CreateSwapForm = ({ requestedBook }: SwapBookProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
-        <div className="grid md:grid-cols-[3fr_1fr_3fr] grid-rows-[auto_1fr_auto] w-full pb-4">
+        <div className="grid grid-cols-[3fr_1fr_3fr] w-full pb-4">
           <FormField
             control={form.control}
-            name="offeringBookId"
+            name="offeredBookId"
             render={({ field }) => (
               <FormItem className="space-y-0 flex flex-col gap-2 items-center">
                 <label className="text-sm uppercase font-semibold text-muted-foreground">
@@ -85,7 +89,7 @@ export const CreateSwapForm = ({ requestedBook }: SwapBookProps) => {
                   trigger={
                     <FormControl>
                       <Button
-                        className="relative overflow-hidden border-dashed h-[24rem] w-[16rem] flex-col hover:opacity-80 transition"
+                        className="relative overflow-hidden border-dashed h-[12rem] w-[8rem] sm:h-[24rem] sm:w-[16rem] flex-col hover:opacity-80 transition"
                         variant="outline"
                       >
                         {selectedBook && previewImage && (
@@ -112,7 +116,7 @@ export const CreateSwapForm = ({ requestedBook }: SwapBookProps) => {
             <label className="text-sm uppercase font-semibold text-muted-foreground">
               Requested book:
             </label>
-            <div className="relative h-[24rem] w-[16rem] mb-1">
+            <div className="relative h-[12rem] w-[8rem] sm:h-[24rem] sm:w-[16rem] mb-1">
               <Image
                 className="rounded-md bg-secondary flex items-center justify-center object-contain"
                 fill
@@ -150,21 +154,6 @@ function BookInfo({ book }: { book: Book }) {
         ))}
       </div>
       <UserInfo user={owner} />
-    </div>
-  );
-}
-
-function UserInfo({ user }: { user: User }) {
-  return (
-    <div className="flex items-center text-muted-foreground text-xs gap-2">
-      <Avatar>
-        <AvatarImage src={user.profile.avatarPath} />
-        <AvatarFallback>
-          {user.profile.firstName[0].toUpperCase() +
-            user.profile.lastName[0].toUpperCase()}
-        </AvatarFallback>
-      </Avatar>
-      {getInitials(user.profile.firstName, user.profile.lastName)}
     </div>
   );
 }

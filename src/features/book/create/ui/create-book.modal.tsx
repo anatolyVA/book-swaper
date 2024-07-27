@@ -15,7 +15,7 @@ export function CreateBookModal({
       trigger={trigger}
       triggerAsChild={triggerAsChild}
       form={<CreateBookForm />}
-      title={"Create book"}
+      title={"Add book"}
     />
   );
 }

@@ -6,6 +6,7 @@ export enum ROUTES {
   USER_BOOKS = "/i/books",
   USER_SWAPS = "/i/swaps",
   USER_SETTINGS = "/i/settings",
+  USER_REQUESTS = "/i/requests",
   BOOKS = "/books",
   BOOK = "/books/:id",
 }

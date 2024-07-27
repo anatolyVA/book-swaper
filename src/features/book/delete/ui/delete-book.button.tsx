@@ -39,7 +39,9 @@ export function DeleteBookButton({ bookId }: { bookId: string }) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">Delete</Button>
+        <Button variant="destructive" className="w-full">
+          Delete
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

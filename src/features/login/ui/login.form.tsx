@@ -36,7 +36,7 @@ export function LoginForm() {
       .then(({ access_token }) => {
         saveTokenStorage(access_token);
         toast.success("Welcome back!");
-        router.push("/books");
+        router.back();
       })
       .catch((err) => {
         const data = err?.response?.data;
