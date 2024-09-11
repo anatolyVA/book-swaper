@@ -7,7 +7,7 @@ import { SimilarBookList } from "@/widgets/similar-books";
 import { HEADER_HEIGHT } from "@/shared/config/const";
 import { BookAlbum } from "@/widgets/book-album";
 import { BookControls } from "@/widgets/book-controls";
-import { AddToFavoriteButton } from "@/features/book/add-to-favorite";
+import { FavoriteButton } from "@/features/book/favorite";
 
 interface BookPageProps {
   params: {
@@ -44,7 +44,7 @@ export default async function BookPage({ params }: BookPageProps) {
       <div className="grid lg:grid-cols-[6fr_4fr] gap-8">
         <BookAlbum book={data} />
         <div className="flex flex-col gap-4 relative">
-          <AddToFavoriteButton className="absolute top-4 right-4" />
+          <FavoriteButton bookId={id} className="absolute top-4 right-4" />
           <BookCharacteristicList book={data} className="flex-1" />
 
           {/* TODO: replace this */}

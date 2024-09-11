@@ -26,7 +26,7 @@ export default function SignInPage() {
           </Button>
         </div>
       </section>
-      <section className="bg-primary hidden xl:block"></section>
+      <section className="bg-secondary hidden xl:block"></section>
     </main>
   );
 }

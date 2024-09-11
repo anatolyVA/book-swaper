@@ -5,7 +5,6 @@ import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Country } from "country-state-city";
-import { api } from "@/shared/api/axios";
 import {
   Author,
   Book,
@@ -68,7 +67,7 @@ export function BookListFilters({
   );
   const [authorVariants, setAuthorVariants] = React.useState<OptionVariant[]>(
     authors.map((author) => ({
-      label: getInitials(author.firstName, author.lastName, author.patronym),
+      label: getInitials(author),
       value: author.id,
     })),
   );
@@ -133,7 +132,7 @@ export function BookListFilters({
   };
   return (
     <>
-      <aside className="hidden xl:block px-8 pb-4 h-fit">
+      <aside className="hidden xl:block pr-8 pb-4 h-fit">
         <header className="xl:mb-4">
           <h2 className="text-2xl">Filters</h2>
         </header>

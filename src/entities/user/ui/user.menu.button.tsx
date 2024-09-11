@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
 import { User } from "@/entities/user";
-import { convertPathToUrl, getInitials } from "@/shared/lib/utils";
+import { getInitials } from "@/shared/lib/utils";
 import { ArrowRightLeft, LibraryIcon, PlusIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/shared/config/routes";
@@ -32,7 +32,7 @@ export function UserMenuButton({
           <UserAvatar data={data.profile} />
           <div className="hidden md:flex flex-col">
             <span className="text-sm text-left">
-              {getInitials(data.profile.firstName, data.profile.lastName)}
+              {getInitials(data.profile)}
             </span>
             <span className="text-xs text-muted-foreground">{data.email}</span>
           </div>

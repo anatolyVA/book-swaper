@@ -1,5 +1,6 @@
 import React from "react";
 import { ProfileNavSidebar } from "@/widgets/profile-nav";
+import { HEADER_HEIGHT } from "@/shared/config/const";
 
 function ProfileLayout({ children }: { children: React.ReactNode }) {
   return (

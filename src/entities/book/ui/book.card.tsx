@@ -8,8 +8,6 @@ import { Book, BookCharacteristicValue } from "@/entities/book";
 import { Card, CardContent, CardFooter } from "@/shared/ui/card";
 import Link from "next/link";
 import { ROUTES } from "@/shared/config/routes";
-import { Bookmark, Heart } from "lucide-react";
-import { getInitials } from "@/shared/lib/utils";
 import { BookStatusBadge } from "@/entities/book/ui/book.status.badge";
 
 interface BookCardProps {

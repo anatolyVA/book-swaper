@@ -12,11 +12,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getInitials = (
-  firstName: string,
-  lastName: string,
-  patronym: string = "",
-) =>
+export const getInitials = ({
+  firstName,
+  lastName,
+  patronym,
+}: {
+  firstName: string;
+  lastName: string;
+  patronym?: string;
+}) =>
   patronym
     ? `${lastName} ${firstName[0]}.${patronym[0]}.`
     : `${lastName} ${firstName[0]}.`;

@@ -2,9 +2,8 @@
 
 import { BookCard } from "@/entities/book/ui/book.card";
 import { Author, Book, Language } from "@/entities/book";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { AddToFavoriteButton } from "@/features/book/add-to-favorite";
+import { FavoriteButton } from "@/features/book/favorite";
 import { BookListFilters } from "./book-list.filters";
 import { BOOKS_PER_PAGE } from "@/shared/config/const";
 import {
@@ -61,9 +60,7 @@ export function BookList({
           <BookListSortOptions
             value={sortOption}
             onValueChange={(opt) => {
-              console.log(opt);
               setSortOption(opt);
-              console.log(sortBooksBy(books, sortOption));
             }}
           />
           <ToggleGroup
@@ -95,12 +92,17 @@ export function BookList({
               isUserBook={profile && profile.id === book.owner.id}
               swapTrigger={
                 <CreateSwapRequestModal
-                  trigger={<CreateSwapRequestButton className="w-full" />}
+                  trigger={
+                    <CreateSwapRequestButton
+                      disabled={profile && profile.id === book.owner.id}
+                      className="w-full"
+                    />
+                  }
                   triggerAsChild
                   requestedBook={book}
                 />
               }
-              addToFavButton={<AddToFavoriteButton />}
+              addToFavButton={<FavoriteButton bookId={book.id} />}
             />
           ))}
           {books.length === 0 && (

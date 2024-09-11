@@ -27,7 +27,7 @@ export const CreateSwapRequestButton = React.forwardRef<
     onClick?.(e);
   };
   return (
-    <Button ref={ref} onClick={onClick} {...props}>
+    <Button ref={ref} onClick={handleClick} {...props}>
       Swap
     </Button>
   );

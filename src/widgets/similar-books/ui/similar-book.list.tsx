@@ -7,7 +7,7 @@ import {
   CreateSwapRequestButton,
   CreateSwapRequestModal,
 } from "@/features/swap-request/create";
-import { AddToFavoriteButton } from "@/features/book/add-to-favorite";
+import { FavoriteButton } from "@/features/book/favorite";
 import { useProfile } from "@/entities/user";
 
 interface SimilarBookListProps {
@@ -37,7 +37,7 @@ export function SimilarBookList({ data, className }: SimilarBookListProps) {
                     requestedBook={book}
                   />
                 }
-                addToFavButton={<AddToFavoriteButton />}
+                addToFavButton={<FavoriteButton bookId={book.id} />}
               />
             ))
           : "No similar books"}

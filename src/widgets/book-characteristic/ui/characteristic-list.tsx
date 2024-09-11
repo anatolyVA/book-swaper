@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { beautifyValue, cn, getInitials } from "@/shared/lib/utils";
+import { cn, getInitials } from "@/shared/lib/utils";
 import {
   Book,
   BookCharacteristicValue,
@@ -28,9 +28,7 @@ export function BookCharacteristicList({
       <header>
         <BookStatusBadge status={book.status} />
         <h1 className="text-primary text-2xl font-bold mr-16">{book.title}</h1>
-        <span className="text-lg">
-          {getInitials(author.firstName, author.lastName, author.patronym)}
-        </span>
+        <span className="text-lg">{getInitials(author)}</span>
       </header>
       <main className="flex flex-col gap-4">
         <div className="grid lg:grid-cols-2 gap-2 lg:gap-4 lg:w-[330px]">

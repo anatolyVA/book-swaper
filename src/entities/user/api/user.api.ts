@@ -1,5 +1,10 @@
 import { api, apiWithAuth } from "@/shared/api/axios";
-import { User, createUserSchema } from "../types";
+import {
+  User,
+  createUserSchema,
+  UserStatistics,
+  updateUserSchema,
+} from "../types";
 import { z } from "zod";
 
 class UserApi {
@@ -20,11 +25,8 @@ class UserApi {
     return data;
   }
 
-  async updateUser(user: User) {
-    const { data } = await apiWithAuth.put<User>(
-      `${this.URL}/${user.id}`,
-      user,
-    );
+  async updateUser(id: string, values: z.infer<typeof updateUserSchema>) {
+    const { data } = await apiWithAuth.patch<User>(`${this.URL}/${id}`, values);
     return data;
   }
 
@@ -35,6 +37,20 @@ class UserApi {
 
   async createUser(values: z.infer<typeof createUserSchema>) {
     const { data } = await api.post(this.URL, values);
+    return data;
+  }
+
+  async getStatistics(id: string) {
+    const { data } = await api.get<UserStatistics>(
+      `${this.URL}/${id}/statistics`,
+    );
+    return data;
+  }
+
+  async getCurrentUserStatistics() {
+    const { data } = await apiWithAuth.get<UserStatistics>(
+      `${this.URL}/me/statistics`,
+    );
     return data;
   }
 }

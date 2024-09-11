@@ -17,14 +17,11 @@ import { ArrowRightLeft, PlusIcon } from "lucide-react";
 import { Book, bookApi, BookComboBox } from "@/entities/book";
 import { toast } from "sonner";
 import {
-  getInitials,
   convertPathToUrl,
   getBookTags,
   beautifyValue,
 } from "@/shared/lib/utils";
 import { Badge } from "@/shared/ui/badge";
-import { swapApi, swapBookSchema } from "@/entities/swap";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { User, UserInfo } from "@/entities/user";
 import Image from "next/image";
 import {
@@ -153,7 +150,7 @@ function BookInfo({ book }: { book: Book }) {
           </Badge>
         ))}
       </div>
-      <UserInfo user={owner} />
+      <UserInfo size="sm" user={owner} />
     </div>
   );
 }

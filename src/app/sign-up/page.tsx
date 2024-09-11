@@ -10,7 +10,7 @@ import { Logo } from "@/entities/logo";
 export default function SignUpPage() {
   return (
     <main className="grid xl:grid-cols-2 min-h-screen">
-      <section className="bg-primary hidden xl:block"></section>
+      <section className="bg-secondary hidden xl:block"></section>
       <section
         className={`relative flex flex-col gap-4 p-12 justify-center items-center`}
       >
